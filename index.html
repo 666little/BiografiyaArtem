@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тёмная биография Артёма</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+        
+        :root {
+            --primary: #ff4d4d;
+            --secondary: #5d9bff;
+            --accent: #3d7ea6;
+            --dark: #0a0a0a;
+            --darker: #1a1a1a;
+            --light: #e0e0e0;
+            --card-bg: rgba(30, 30, 30, 0.95);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Анимированный фон */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,77,77,0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: inline-block;
+            padding: 0 20px;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .container.show h1::after {
+            transform: scaleX(1);
+        }
+        
+        .bio {
+            background: #252525;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+            margin-bottom: 30px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bio::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 65%, rgba(255,77,77,0.05) 100%);
+            z-index: 0;
+        }
+        
+        .bio:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4), 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            color: #ff7b54;
+            margin-top: 40px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--accent);
+            transition: all 0.3s ease;
+            font-size: 1.8em;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        h2:hover {
+            color: #ff9d76;
+        }
+        
+        h2:hover::after {
+            width: 100%;
+        }
+        
+        .systems, .social {
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .systems::before, .social::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 70%, rgba(93,155,255,0.05) 100%);
+            z-index: 0;
+        }
+        
+        .systems:hover, .social:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4), 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social {
+            background: #2a1e2a;
+            border-left: 5px solid var(--primary);
+        }
+        
+        ul {
+            padding-left: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            position: relative;
+            list-style-type: none;
+            padding: 10px 15px 10px 45px;
+            background: rgba(40, 40, 40, 0.5);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        li:hover {
+            transform: translateX(8px);
+            background: rgba(50, 50, 50, 0.7);
+            border-left: 3px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        li:before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        li:hover:before {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.5);
+            box-shadow: 0 0 10px var(--secondary);
+        }
+        
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+        
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        a:hover {
+            text-shadow: 0 0 10px rgba(93, 155, 255, 0.7);
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: var(--primary);
+            text-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .highlight:hover::after {
+            width: 100%;
+        }
+        
+        .highlight:hover {
+            color: #ff7b54;
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.8);
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+            transition: all 0.3s ease;
+            vertical-align: middle;
+        }
+        
+        li:hover .emoji {
+            transform: scale(1.3);
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+        }
+        
+        .youtube-link {
+            background: linear-gradient(45deg, #ff0000, #ff4d4d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .telegram-link {
+            background: linear-gradient(45deg, #0088cc, #00aced);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Кнопка "Наверх" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary), #ff7b54);
+            color: white;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(255, 77, 77, 0.3);
+            border: none;
+            outline: none;
+        }
+        
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #ff3d3d, #ff6b42);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 77, 77, 0.4);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Анимация появления элементов при скролле */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Пульсирующая анимация для привлечения внимания */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        /* Анимированные границы */
+        .glow-border {
+            position: relative;
+        }
+        
+        .glow-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: inherit;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--secondary), var(--primary));
+            background-size: 400%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-border:hover::after {
+            opacity: 1;
+            animation: gradient-border 3s linear infinite;
+        }
+        
+        @keyframes gradient-border {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .bio, .systems, .social {
+                padding: 15px;
+            }
+            
+            li {
+                padding: 8px 12px 8px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <canvas id="particles" class="bg-particles"></canvas>
+    
+    <div class="container">
+        <h1 class="glow-border pulse">👋 Привет, я Артём!</h1>
+        
+        <div class="bio glow-border">
+            <p>Меня зовут <span class="highlight">Артём</span>, и я увлекаюсь технологиями, программированием и всем, что связано с компьютерами. В свободное время люблю изучать новые операционные системы и делиться знаниями с другими.</p>
+            <p>Это моя персональная страница, где я рассказываю о себе и своих интересах.</p>
+        </div>
+        
+        <h2 class="glow-border">🖥️ Мои системы</h2>
+        <div class="systems glow-border">
+            <ul>
+                <li><span class="emoji">💻</span> Windows - моя основная система для работы и игр</li>
+                <li><span class="emoji">🐧</span> Linux Ubuntu - использую для разработки и изучения</li>
+            </ul>
+        </div>
+        
+        <h2 class="glow-border">📱 Соц-сети</h2>
+        <div class="social glow-border">
+            <ul>
+                <li><span class="emoji">🎥</span> <a href="https://www.youtube.com/@ADVENTERLSW" target="_blank" class="youtube-link">Мой YouTube канал</a> - подписывайся!</li>
+                <li><span class="emoji">💬</span> <a href="https://t.me/ArtemCodePy" target="_blank" class="telegram-link">Мой Telegram канал</a> - заходи!</li>
+            </ul>
+        </div>
+    </div>
+    
+    <button class="back-to-top">↑</button>
+
+    <script>
+        // Плавное появление контейнера при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.classList.add('show');
+            
+            // Анимация элементов при скролле
+            const fadeElements = document.querySelectorAll('.bio, .systems, .social, h2');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('fade-in');
+                    }
+                });
+                
+                // Кнопка "Наверх"
+                const backToTopButton = document.querySelector('.back-to-top');
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            };
+            
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll(); // Вызываем сразу для видимых элементов
+            
+            // Частицы для фона
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = window.innerWidth < 768 ? 30 : 80;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 3 + 1,
+                    speedX: Math.random() * 0.5 - 0.25,
+                    speedY: Math.random() * 0.5 - 0.25,
+                    color: `rgba(255, ${Math.floor(Math.random() * 155 + 100)}, ${Math.floor(Math.random() * 155 + 100)}, ${Math.random() * 0.5 + 0.1})`
+                });
+            }
+            
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                    
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    
+                    if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+                }
+                
+                requestAnimationFrame(animateParticles);
+            }
+            
+            animateParticles();
+            
+            // Ресайз канваса при изменении размера окна
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+            
+            // Клик по кнопке "Наверх"
+            document.querySelector('.back-to-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
