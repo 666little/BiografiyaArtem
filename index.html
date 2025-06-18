@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тёмная биография Артёма</title>
+    <title>Тёмно-голубая биография Артёма</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
         
         :root {
-            --primary: #ff4d4d;
+            --primary: #4d9dff;
             --secondary: #5d9bff;
             --accent: #3d7ea6;
-            --dark: #0a0a0a;
-            --darker: #1a1a1a;
-            --light: #e0e0e0;
-            --card-bg: rgba(30, 30, 30, 0.95);
+            --dark: #0a1520;
+            --darker: #0f1c2a;
+            --light: #e0f0ff;
+            --card-bg: rgba(20, 40, 60, 0.95);
         }
         
         * {
@@ -54,7 +54,7 @@
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid #333;
+            border: 1px solid #1a3a5a;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -70,7 +70,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,77,77,0.1) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(77,157,255,0.1) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
             animation: rotate 20s linear infinite;
         }
@@ -114,7 +114,7 @@
         }
         
         .bio {
-            background: #252525;
+            background: #152a40;
             padding: 25px;
             border-radius: 10px;
             border-left: 5px solid var(--accent);
@@ -132,7 +132,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent 65%, rgba(255,77,77,0.05) 100%);
+            background: linear-gradient(45deg, transparent 65%, rgba(77,157,255,0.05) 100%);
             z-index: 0;
         }
         
@@ -142,7 +142,7 @@
         }
         
         h2 {
-            color: #ff7b54;
+            color: #4dbbff;
             margin-top: 40px;
             padding-bottom: 10px;
             border-bottom: 2px dashed var(--accent);
@@ -164,7 +164,7 @@
         }
         
         h2:hover {
-            color: #ff9d76;
+            color: #76c8ff;
         }
         
         h2:hover::after {
@@ -199,7 +199,7 @@
         }
         
         .social {
-            background: #2a1e2a;
+            background: #1e2a3a;
             border-left: 5px solid var(--primary);
         }
         
@@ -215,7 +215,7 @@
             position: relative;
             list-style-type: none;
             padding: 10px 15px 10px 45px;
-            background: rgba(40, 40, 40, 0.5);
+            background: rgba(30, 50, 70, 0.5);
             border-radius: 8px;
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
@@ -223,7 +223,7 @@
         
         li:hover {
             transform: translateX(8px);
-            background: rgba(50, 50, 50, 0.7);
+            background: rgba(40, 70, 100, 0.7);
             border-left: 3px solid var(--primary);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -278,7 +278,7 @@
         .highlight {
             font-weight: bold;
             color: var(--primary);
-            text-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
+            text-shadow: 0 0 5px rgba(77, 157, 255, 0.5);
             transition: all 0.3s ease;
             position: relative;
             display: inline-block;
@@ -300,8 +300,8 @@
         }
         
         .highlight:hover {
-            color: #ff7b54;
-            text-shadow: 0 0 10px rgba(255, 77, 77, 0.8);
+            color: #76c8ff;
+            text-shadow: 0 0 10px rgba(77, 157, 255, 0.8);
         }
         
         .emoji {
@@ -336,7 +336,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, var(--primary), #ff7b54);
+            background: linear-gradient(135deg, var(--primary), #4dbbff);
             color: white;
             width: 60px;
             height: 60px;
@@ -349,15 +349,15 @@
             visibility: hidden;
             transition: all 0.4s ease;
             z-index: 1000;
-            box-shadow: 0 5px 20px rgba(255, 77, 77, 0.3);
+            box-shadow: 0 5px 20px rgba(77, 157, 255, 0.3);
             border: none;
             outline: none;
         }
         
         .back-to-top:hover {
-            background: linear-gradient(135deg, #ff3d3d, #ff6b42);
+            background: linear-gradient(135deg, #3d8dff, #42a8ff);
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 77, 77, 0.4);
+            box-shadow: 0 8px 25px rgba(77, 157, 255, 0.4);
         }
         
         .back-to-top.active {
@@ -522,7 +522,7 @@
                     size: Math.random() * 3 + 1,
                     speedX: Math.random() * 0.5 - 0.25,
                     speedY: Math.random() * 0.5 - 0.25,
-                    color: `rgba(255, ${Math.floor(Math.random() * 155 + 100)}, ${Math.floor(Math.random() * 155 + 100)}, ${Math.random() * 0.5 + 0.1})`
+                    color: `rgba(${Math.floor(Math.random() * 50 + 50)}, ${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 100 + 200)}, ${Math.random() * 0.5 + 0.1})`
                 });
             }
             
