@@ -1,24 +1,29 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my bio</title>
+    <title>Artem's Bio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
         
         :root {
-            --primary: #4d9dff;
-            --secondary: #5d9bff;
-            --accent: #3d7ea6;
-            --dark: #0a1520;
-            --darker: #0f1c2a;
-            --light: #e0f0ff;
-            --card-bg: rgba(20, 40, 60, 0.95);
+            --primary: #6C5CE7;
+            --secondary: #A29BFE;
+            --accent: #FD79A8;
+            --dark: #2D3436;
+            --darker: #1E272E;
+            --light: #F5F6FA;
+            --card-bg: rgba(30, 39, 46, 0.9);
+            --neon-blue: #18DCFF;
+            --neon-pink: #FF00F7;
         }
         
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
         html {
@@ -26,7 +31,7 @@
         }
         
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.8;
             margin: 0;
             padding: 0;
@@ -34,30 +39,50 @@
             color: var(--light);
             min-height: 100vh;
             overflow-x: hidden;
+            background-attachment: fixed;
         }
         
-        /* Анимированный фон */
-        .bg-particles {
+        /* Анимированный фон с градиентом */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(-45deg, #1E272E, #2D3436, #3D3D3D, #2D3436);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Частицы */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.15;
+            opacity: 0.5;
         }
         
         .container {
             max-width: 900px;
-            margin: 30px auto;
+            margin: 40px auto;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid #1a3a5a;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(108, 92, 231, 0.2);
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
@@ -70,9 +95,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(77,157,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, rgba(0,0,0,0) 70%);
             z-index: -1;
-            animation: rotate 20s linear infinite;
+            animation: rotate 25s linear infinite;
         }
         
         @keyframes rotate {
@@ -85,29 +110,52 @@
             transform: translateY(0);
         }
         
-        /* Круг для фото */
+        /* Профиль */
         .profile {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            position: relative;
         }
         
         .photo-circle {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            background-color: #1a3a5a;
-            border: 3px solid var(--primary);
+            background-color: #1E272E;
+            border: 4px solid var(--primary);
             overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .photo-circle::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink), var(--primary));
+            background-size: 400%;
+            z-index: -1;
+            opacity: 0;
+            transition: 0.5s;
+            animation: gradient-border 3s linear infinite;
+        }
+        
+        .photo-circle:hover::before {
+            opacity: 1;
         }
         
         .photo-circle:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(77, 157, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.6);
             border-color: var(--secondary);
         }
         
@@ -118,14 +166,28 @@
         }
         
         h1 {
-            color: var(--primary);
+            color: var(--light);
             text-align: center;
-            font-size: 2.8em;
+            font-size: 3.2em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
             position: relative;
             display: inline-block;
-            padding: 0 20px;
+            padding: 0 25px;
+            text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-text 5s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradient-text {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         h1::after {
@@ -135,26 +197,28 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s ease;
+            border-radius: 3px;
         }
         
         .container.show h1::after {
             transform: scaleX(1);
         }
         
+        /* Биография */
         .bio {
-            background: #152a40;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid var(--accent);
-            margin-bottom: 30px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s ease;
+            background: rgba(30, 39, 46, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
+            border-left: 5px solid var(--primary);
         }
         
         .bio::before {
@@ -164,63 +228,74 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent 65%, rgba(77,157,255,0.05) 100%);
+            background: linear-gradient(45deg, transparent 65%, rgba(108, 92, 231, 0.05) 100%);
             z-index: 0;
         }
         
         .bio:hover {
-            transform: translateY(-5px);
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4), 0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
         
+        .bio p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Заголовки разделов */
         h2 {
-            color: #4dbbff;
-            margin-top: 40px;
-            padding-bottom: 10px;
-            border-bottom: 2px dashed var(--accent);
-            transition: all 0.3s ease;
-            font-size: 1.8em;
+            color: var(--light);
+            margin: 50px 0 25px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 2em;
             position: relative;
             display: inline-block;
+            padding-bottom: 10px;
         }
         
         h2::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: 0;
             left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            transition: width 0.3s ease;
-        }
-        
-        h2:hover {
-            color: #76c8ff;
-        }
-        
-        h2:hover::after {
             width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
         }
         
         /* Горизонтальная таблица */
         .info-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
-            background: rgba(30, 50, 70, 0.5);
-            border-radius: 10px;
+            margin: 30px 0;
+            background: rgba(40, 50, 60, 0.5);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+        
+        .info-table:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .info-table tr {
+            transition: all 0.3s ease;
         }
         
         .info-table tr:hover {
-            background: rgba(40, 70, 100, 0.7);
+            background: rgba(108, 92, 231, 0.1);
         }
         
         .info-table td {
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(77, 157, 255, 0.2);
+            padding: 18px 25px;
+            border-bottom: 1px solid rgba(108, 92, 231, 0.2);
             transition: all 0.3s ease;
         }
         
@@ -230,23 +305,29 @@
         
         .info-table td:first-child {
             font-weight: 600;
-            color: var(--primary);
+            color: var(--secondary);
             width: 30%;
         }
         
-        .info-table td:hover {
-            transform: translateX(5px);
+        .info-table td:last-child {
+            color: var(--light);
         }
         
+        .info-table td:hover {
+            transform: translateX(8px);
+        }
+        
+        /* Разделы с системами и соцсетями */
         .systems, .social {
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid var(--accent);
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-            margin-bottom: 40px;
-            transition: all 0.4s ease;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 50px;
+            transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
+            background: rgba(40, 50, 60, 0.5);
+            border-left: 5px solid var(--primary);
         }
         
         .systems::before, .social::before {
@@ -256,20 +337,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, transparent 70%, rgba(93,155,255,0.05) 100%);
+            background: linear-gradient(135deg, transparent 70%, rgba(108, 92, 231, 0.05) 100%);
             z-index: 0;
         }
         
         .systems:hover, .social:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4), 0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
         
         .social {
-            background: #1e2a3a;
-            border-left: 5px solid var(--primary);
+            border-left: 5px solid var(--accent);
         }
         
+        /* Списки */
         ul {
             padding-left: 0;
             position: relative;
@@ -277,50 +358,54 @@
         }
         
         li {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 1.1em;
             position: relative;
             list-style-type: none;
-            padding: 10px 15px 10px 45px;
-            background: rgba(30, 50, 70, 0.5);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
+            padding: 15px 20px 15px 60px;
+            background: rgba(40, 50, 60, 0.7);
+            border-radius: 10px;
+            transition: all 0.4s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        li:last-child {
+            margin-bottom: 0;
         }
         
         li:hover {
-            transform: translateX(8px);
-            background: rgba(40, 70, 100, 0.7);
-            border-left: 3px solid var(--primary);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(10px);
+            background: rgba(108, 92, 231, 0.2);
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
-        li:before {
+        li::before {
             content: '';
             position: absolute;
-            left: 15px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
+            width: 15px;
+            height: 15px;
             background: var(--primary);
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
-        li:hover:before {
-            background: var(--secondary);
-            transform: translateY(-50%) scale(1.5);
-            box-shadow: 0 0 10px var(--secondary);
+        li:hover::before {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.3);
+            box-shadow: 0 0 15px var(--accent);
         }
         
+        /* Ссылки */
         a {
             color: var(--secondary);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
-            display: inline-block;
         }
         
         a::after {
@@ -339,71 +424,57 @@
         }
         
         a:hover {
-            text-shadow: 0 0 10px rgba(93, 155, 255, 0.7);
+            color: var(--light);
+            text-shadow: 0 0 10px rgba(162, 155, 254, 0.7);
         }
         
+        /* Специальные стили для ссылок */
+        .youtube-link {
+            background: linear-gradient(45deg, #FF0000, #FF5E5E);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+        
+        .telegram-link {
+            background: linear-gradient(45deg, #0088CC, #00ACED);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+        
+        /* Выделенный текст */
         .highlight {
             font-weight: bold;
-            color: var(--primary);
-            text-shadow: 0 0 5px rgba(77, 157, 255, 0.5);
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             transition: all 0.3s ease;
-            position: relative;
-            display: inline-block;
         }
         
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-        
-        .highlight:hover::after {
-            width: 100%;
-        }
-        
-        .highlight:hover {
-            color: #76c8ff;
-            text-shadow: 0 0 10px rgba(77, 157, 255, 0.8);
-        }
-        
+        /* Эмодзи */
         .emoji {
-            font-size: 1.3em;
-            margin-right: 10px;
-            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
-            transition: all 0.3s ease;
+            font-size: 1.4em;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+            transition: all 0.4s ease;
             vertical-align: middle;
         }
         
         li:hover .emoji {
-            transform: scale(1.3);
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
-        }
-        
-        .youtube-link {
-            background: linear-gradient(45deg, #ff0000, #ff4d4d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .telegram-link {
-            background: linear-gradient(45deg, #0088cc, #00aced);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            transform: scale(1.4);
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
         }
         
         /* Кнопка "Наверх" */
         .back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, var(--primary), #4dbbff);
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             width: 60px;
             height: 60px;
@@ -416,15 +487,14 @@
             visibility: hidden;
             transition: all 0.4s ease;
             z-index: 1000;
-            box-shadow: 0 5px 20px rgba(77, 157, 255, 0.3);
+            box-shadow: 0 5px 25px rgba(108, 92, 231, 0.4);
             border: none;
             outline: none;
         }
         
         .back-to-top:hover {
-            background: linear-gradient(135deg, #3d8dff, #42a8ff);
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(77, 157, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(253, 121, 168, 0.5);
         }
         
         .back-to-top.active {
@@ -432,7 +502,7 @@
             visibility: visible;
         }
         
-        /* Анимация появления элементов при скролле */
+        /* Анимация появления элементов */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -445,100 +515,94 @@
         }
         
         .fade-in {
-            animation: fadeInUp 0.8s ease-out forwards;
+            animation: fadeInUp 1s ease-out forwards;
         }
         
-        /* Пульсирующая анимация для привлечения внимания */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        /* Неоновый эффект */
+        .neon-text {
+            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            animation: neon-flicker 1.5s infinite alternate;
         }
         
-        .pulse {
-            animation: pulse 2s infinite ease-in-out;
-        }
-        
-        /* Анимированные границы */
-        .glow-border {
-            position: relative;
-        }
-        
-        .glow-border::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: inherit;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--secondary), var(--primary));
-            background-size: 400%;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .glow-border:hover::after {
-            opacity: 1;
-            animation: gradient-border 3s linear infinite;
-        }
-        
-        @keyframes gradient-border {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 400% 50%; }
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            }
+            20%, 24%, 55% {        
+                text-shadow: none;
+            }
         }
         
         /* Адаптивность */
         @media (max-width: 768px) {
             .container {
-                margin: 15px;
-                padding: 20px;
+                margin: 20px;
+                padding: 25px;
             }
             
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
             
             .photo-circle {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .info-table {
-                display: block;
-                overflow-x: auto;
+                width: 140px;
+                height: 140px;
             }
             
             .info-table td {
-                padding: 10px 15px;
+                padding: 12px 15px;
+                display: block;
+                width: 100%;
+            }
+            
+            .info-table td:first-child {
+                font-size: 1.1em;
+                padding-bottom: 5px;
+                border-bottom: none;
+            }
+            
+            .info-table tr {
+                border-bottom: 1px solid rgba(108, 92, 231, 0.2);
+            }
+            
+            .info-table tr:last-child {
+                border-bottom: none;
             }
             
             .bio, .systems, .social {
-                padding: 15px;
+                padding: 20px;
             }
             
             li {
-                padding: 8px 12px 8px 40px;
+                padding: 12px 15px 12px 50px;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Анимированный фон -->
-    <canvas id="particles" class="bg-particles"></canvas>
+    <div class="bg-animation"></div>
+    <canvas id="particles" class="particles"></canvas>
     
     <div class="container">
         <div class="profile">
             <div class="photo-circle">
-                <!-- Замените src на путь к вашему фото -->
-                <img src="https://i.ibb.co/218Yk758/3e90ef9496a356d906782cbcf298aa21.jpg" alt="Фото Артёма">
+                <img src="https://i.ibb.co/218Yk758/3e90ef9496a356d906782cbcf298aa21.jpg" alt="Artem's Photo">
             </div>
-            <h1 class="glow-border pulse">👋Hi, my name is Artem!</h1>
+            <h1>👋 Hi, I'm Artem!</h1>
         </div>
         
-        <!-- Горизонтальная таблица -->
-        <table class="info-table glow-border">
+        <!-- Информационная таблица -->
+        <table class="info-table">
             <tr>
                 <td>Age:</td>
                 <td>11 years</td>
@@ -548,36 +612,38 @@
                 <td>Obninsk</td>
             </tr>
             <tr>
-            </tr>
-            <tr>
-                <td>hobby:</td>
+                <td>Hobby:</td>
                 <td>OS study, development</td>
             </tr>
         </table>
         
-        <div class="bio glow-border">
-            <p>My name <span class="highlight">Artem</span>, I like to play games like Roblox,minecraft,geometry dash, nursultan client (minecraft cheat).</p>
-            <p.</p>
+        <!-- Биография -->
+        <div class="bio">
+            <p>My name is <span class="highlight">Artem</span>, I'm a young enthusiast passionate about technology and gaming. I love exploring operating systems and developing small projects in my free time.</p>
+            <p>When I'm not coding, you can find me playing my favorite games like Roblox, Minecraft, Geometry Dash, and experimenting with Nursultan client for Minecraft.</p>
         </div>
         
-        <h2 class="glow-border">🖥️ My system</h2>
-        <div class="systems glow-border">
+        <!-- Мои системы -->
+        <h2><i class="fas fa-laptop-code" style="margin-right: 10px;"></i> My Systems</h2>
+        <div class="systems">
             <ul>
-                <li><span class="emoji">💻</span> Windows - my main system for work and games</li>
-                <li><span class="emoji">🐧</span> Linux Ubuntu - I use it for development and study</li>
+                <li><span class="emoji">💻</span> <strong>Windows</strong> - My main system for gaming and everyday use</li>
+                <li><span class="emoji">🐧</span> <strong>Linux Ubuntu</strong> - For development and learning new technologies</li>
             </ul>
         </div>
         
-        <h2 class="glow-border">📱 Social networks</h2>
-        <div class="social glow-border">
+        <!-- Социальные сети -->
+        <h2><i class="fas fa-share-alt" style="margin-right: 10px;"></i> My Socials</h2>
+        <div class="social">
             <ul>
-                <li><span class="emoji">🎥</span> <a href="https://www.youtube.com/@ADVENTERLSW" target="_blank" class="youtube-link">My YouTube channel</a> - Subscribe!</li>
-                <li><span class="emoji">💬</span> <a href="https://t.me/ArtemCodePy" target="_blank" class="telegram-link">My Telegram channel</a> - Come in!</li>
+                <li><span class="emoji"><i class="fab fa-youtube"></i></span> <a href="https://www.youtube.com/@ADVENTERLSW" target="_blank" class="youtube-link">YouTube Channel</a> - Check out my videos!</li>
+                <li><span class="emoji"><i class="fab fa-telegram"></i></span> <a href="https://t.me/ArtemCodePy" target="_blank" class="telegram-link">Telegram Channel</a> - Join my community!</li>
             </ul>
         </div>
     </div>
     
-    <button class="back-to-top">↑</button>
+    <!-- Кнопка "Наверх" -->
+    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
 
     <script>
         // Плавное появление контейнера при загрузке
@@ -618,16 +684,16 @@
             canvas.height = window.innerHeight;
             
             const particles = [];
-            const particleCount = window.innerWidth < 768 ? 30 : 80;
+            const particleCount = window.innerWidth < 768 ? 50 : 150;
             
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
                     size: Math.random() * 3 + 1,
-                    speedX: Math.random() * 0.5 - 0.25,
-                    speedY: Math.random() * 0.5 - 0.25,
-                    color: `rgba(${Math.floor(Math.random() * 50 + 50)}, ${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 100 + 200)}, ${Math.random() * 0.5 + 0.1})`
+                    speedX: Math.random() * 1 - 0.5,
+                    speedY: Math.random() * 1 - 0.5,
+                    color: `rgba(${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 100 + 200)}, ${Math.random() * 0.5 + 0.1})`
                 });
             }
             
@@ -647,6 +713,21 @@
                     
                     if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
                     if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+                    
+                    // Соединение частиц
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const distance = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
+                        
+                        if (distance < 150) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(162, 155, 254, ${1 - distance/150})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
                 }
                 
                 requestAnimationFrame(animateParticles);
@@ -667,6 +748,13 @@
                     top: 0,
                     behavior: 'smooth'
                 });
+            });
+            
+            // Параллакс эффект для фона
+            document.addEventListener('mousemove', function(e) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                document.querySelector('.bg-animation').style.backgroundPosition = `${x * 100}% ${y * 100}%`;
             });
         });
     </script>
