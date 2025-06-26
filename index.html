@@ -15,7 +15,7 @@
             --dark: #2D3436;
             --darker: #1E272E;
             --light: #F5F6FA;
-            --card-bg: rgba(30, 39, 46, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.1); /* Более прозрачный фон */
             --neon-blue: #18DCFF;
             --neon-pink: #FF00F7;
         }
@@ -35,30 +35,34 @@
             line-height: 1.8;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
-            color: var(--light);
+            color: white; /* Белый текст для лучшей видимости */
             min-height: 100vh;
             overflow-x: hidden;
+        }
+        
+        /* New York Night Background */
+        .ny-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background-image: url('https://i.ibb.co/WvCL53Hr/new-york-usa-night-city-118407-3840x2400.jpg');
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
         }
         
-        /* Анимированный фон с градиентом */
-        .bg-animation {
+        /* Затемнение фона */
+        .dark-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(-45deg, #1E272E, #2D3436, #3D3D3D, #2D3436);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            background: rgba(0, 0, 0, 0.4);
         }
         
         /* Частицы */
@@ -69,7 +73,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.5;
+            opacity: 0.3;
         }
         
         .container {
@@ -78,12 +82,12 @@
             background: var(--card-bg);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(108, 92, 231, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(108, 92, 231, 0.3);
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px);
             position: relative;
             overflow: hidden;
         }
@@ -123,7 +127,7 @@
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            background-color: #1E272E;
+            background-color: rgba(30, 39, 46, 0.7);
             border: 4px solid var(--primary);
             overflow: hidden;
             margin-bottom: 25px;
@@ -166,7 +170,7 @@
         }
         
         h1 {
-            color: var(--light);
+            color: white;
             text-align: center;
             font-size: 3.2em;
             margin-bottom: 20px;
@@ -210,7 +214,7 @@
         
         /* Биография */
         .bio {
-            background: rgba(30, 39, 46, 0.7);
+            background: rgba(30, 39, 46, 0.5);
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 40px;
@@ -243,11 +247,12 @@
             line-height: 1.8;
             position: relative;
             z-index: 1;
+            color: white;
         }
         
         /* Заголовки разделов */
         h2 {
-            color: var(--light);
+            color: white;
             margin: 50px 0 25px;
             font-family: 'Quicksand', sans-serif;
             font-weight: 600;
@@ -273,7 +278,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 30px 0;
-            background: rgba(40, 50, 60, 0.5);
+            background: rgba(40, 50, 60, 0.4);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -297,6 +302,7 @@
             padding: 18px 25px;
             border-bottom: 1px solid rgba(108, 92, 231, 0.2);
             transition: all 0.3s ease;
+            color: white;
         }
         
         .info-table tr:last-child td {
@@ -310,7 +316,7 @@
         }
         
         .info-table td:last-child {
-            color: var(--light);
+            color: white;
         }
         
         .info-table td:hover {
@@ -326,7 +332,7 @@
             transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
-            background: rgba(40, 50, 60, 0.5);
+            background: rgba(40, 50, 60, 0.4);
             border-left: 5px solid var(--primary);
         }
         
@@ -363,10 +369,11 @@
             position: relative;
             list-style-type: none;
             padding: 15px 20px 15px 60px;
-            background: rgba(40, 50, 60, 0.7);
+            background: rgba(40, 50, 60, 0.5);
             border-radius: 10px;
             transition: all 0.4s ease;
             border-left: 4px solid transparent;
+            color: white;
         }
         
         li:last-child {
@@ -424,7 +431,7 @@
         }
         
         a:hover {
-            color: var(--light);
+            color: white;
             text-shadow: 0 0 10px rgba(162, 155, 254, 0.7);
         }
         
@@ -589,8 +596,9 @@
     </style>
 </head>
 <body>
-    <!-- Анимированный фон -->
-    <div class="bg-animation"></div>
+    <!-- New York Night Background -->
+    <div class="ny-background"></div>
+    <div class="dark-overlay"></div>
     <canvas id="particles" class="particles"></canvas>
     
     <div class="container">
@@ -754,7 +762,7 @@
             document.addEventListener('mousemove', function(e) {
                 const x = e.clientX / window.innerWidth;
                 const y = e.clientY / window.innerHeight;
-                document.querySelector('.bg-animation').style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+                document.querySelector('.ny-background').style.transform = `scale(1.1) translate(${x * 20}px, ${y * 20}px)`;
             });
         });
     </script>
